@@ -1,0 +1,226 @@
+
+CREATE TABLE com_logali_SalesOrder (
+  ID NVARCHAR(36) NOT NULL,
+  createdAt TIMESTAMP_TEXT,
+  createdBy NVARCHAR(255),
+  modifiedAt TIMESTAMP_TEXT,
+  modifiedBy NVARCHAR(255),
+  email NVARCHAR(30) NOT NULL,
+  firtsname NVARCHAR(30),
+  lastname NVARCHAR(30),
+  country NVARCHAR(30),
+  createon DATE_TEXT,
+  deliverydate TIMESTAMP_TEXT,
+  orderstatus INTEGER,
+  imagenurl NVARCHAR(5000),
+  item_ID NVARCHAR(36),
+  PRIMARY KEY(ID, email)
+);
+
+CREATE TABLE com_logali_SalesItem (
+  ID NVARCHAR(36) NOT NULL,
+  createdAt TIMESTAMP_TEXT,
+  createdBy NVARCHAR(255),
+  modifiedAt TIMESTAMP_TEXT,
+  modifiedBy NVARCHAR(255),
+  name NVARCHAR(40),
+  description NVARCHAR(40),
+  releasedate TIMESTAMP_TEXT,
+  discontinueddate TIMESTAMP_TEXT,
+  price DECIMAL(12, 2),
+  height DECIMAL(15, 3),
+  width DECIMAL(13, 3),
+  depth DECIMAL(12, 2),
+  quantity DECIMAL(12, 2),
+  unitofmeasuare NVARCHAR(2),
+  header_ID NVARCHAR(36),
+  header_email NVARCHAR(30),
+  PRIMARY KEY(ID)
+);
+
+CREATE TABLE com_logali_SalesItem_texts (
+  locale NVARCHAR(14) NOT NULL,
+  ID NVARCHAR(36) NOT NULL,
+  description NVARCHAR(40),
+  PRIMARY KEY(locale, ID)
+);
+
+CREATE VIEW com_logali_SelSalesOrder AS SELECT
+  SalesOrder_0.ID,
+  SalesOrder_0.createdAt,
+  SalesOrder_0.createdBy,
+  SalesOrder_0.modifiedAt,
+  SalesOrder_0.modifiedBy,
+  SalesOrder_0.email,
+  SalesOrder_0.firtsname,
+  SalesOrder_0.lastname,
+  SalesOrder_0.country,
+  SalesOrder_0.createon,
+  SalesOrder_0.deliverydate,
+  SalesOrder_0.orderstatus,
+  SalesOrder_0.imagenurl,
+  SalesOrder_0.item_ID
+FROM com_logali_SalesOrder AS SalesOrder_0;
+
+CREATE VIEW localized_com_logali_SalesItem AS SELECT
+  L_0.ID,
+  L_0.createdAt,
+  L_0.createdBy,
+  L_0.modifiedAt,
+  L_0.modifiedBy,
+  L_0.name,
+  coalesce(localized_1.description, L_0.description) AS description,
+  L_0.releasedate,
+  L_0.discontinueddate,
+  L_0.price,
+  L_0.height,
+  L_0.width,
+  L_0.depth,
+  L_0.quantity,
+  L_0.unitofmeasuare,
+  L_0.header_ID,
+  L_0.header_email
+FROM (com_logali_SalesItem AS L_0 LEFT JOIN com_logali_SalesItem_texts AS localized_1 ON localized_1.ID = L_0.ID AND localized_1.locale = 'en');
+
+CREATE VIEW localized_com_logali_SalesOrder AS SELECT
+  L.ID,
+  L.createdAt,
+  L.createdBy,
+  L.modifiedAt,
+  L.modifiedBy,
+  L.email,
+  L.firtsname,
+  L.lastname,
+  L.country,
+  L.createon,
+  L.deliverydate,
+  L.orderstatus,
+  L.imagenurl,
+  L.item_ID
+FROM com_logali_SalesOrder AS L;
+
+CREATE VIEW localized_com_logali_SelSalesOrder AS SELECT
+  SalesOrder_0.ID,
+  SalesOrder_0.createdAt,
+  SalesOrder_0.createdBy,
+  SalesOrder_0.modifiedAt,
+  SalesOrder_0.modifiedBy,
+  SalesOrder_0.email,
+  SalesOrder_0.firtsname,
+  SalesOrder_0.lastname,
+  SalesOrder_0.country,
+  SalesOrder_0.createon,
+  SalesOrder_0.deliverydate,
+  SalesOrder_0.orderstatus,
+  SalesOrder_0.imagenurl,
+  SalesOrder_0.item_ID
+FROM localized_com_logali_SalesOrder AS SalesOrder_0;
+
+CREATE VIEW localized_de_com_logali_SalesItem AS SELECT
+  L_0.ID,
+  L_0.createdAt,
+  L_0.createdBy,
+  L_0.modifiedAt,
+  L_0.modifiedBy,
+  L_0.name,
+  coalesce(localized_de_1.description, L_0.description) AS description,
+  L_0.releasedate,
+  L_0.discontinueddate,
+  L_0.price,
+  L_0.height,
+  L_0.width,
+  L_0.depth,
+  L_0.quantity,
+  L_0.unitofmeasuare,
+  L_0.header_ID,
+  L_0.header_email
+FROM (com_logali_SalesItem AS L_0 LEFT JOIN com_logali_SalesItem_texts AS localized_de_1 ON localized_de_1.ID = L_0.ID AND localized_de_1.locale = 'de');
+
+CREATE VIEW localized_fr_com_logali_SalesItem AS SELECT
+  L_0.ID,
+  L_0.createdAt,
+  L_0.createdBy,
+  L_0.modifiedAt,
+  L_0.modifiedBy,
+  L_0.name,
+  coalesce(localized_fr_1.description, L_0.description) AS description,
+  L_0.releasedate,
+  L_0.discontinueddate,
+  L_0.price,
+  L_0.height,
+  L_0.width,
+  L_0.depth,
+  L_0.quantity,
+  L_0.unitofmeasuare,
+  L_0.header_ID,
+  L_0.header_email
+FROM (com_logali_SalesItem AS L_0 LEFT JOIN com_logali_SalesItem_texts AS localized_fr_1 ON localized_fr_1.ID = L_0.ID AND localized_fr_1.locale = 'fr');
+
+CREATE VIEW localized_de_com_logali_SalesOrder AS SELECT
+  L.ID,
+  L.createdAt,
+  L.createdBy,
+  L.modifiedAt,
+  L.modifiedBy,
+  L.email,
+  L.firtsname,
+  L.lastname,
+  L.country,
+  L.createon,
+  L.deliverydate,
+  L.orderstatus,
+  L.imagenurl,
+  L.item_ID
+FROM com_logali_SalesOrder AS L;
+
+CREATE VIEW localized_fr_com_logali_SalesOrder AS SELECT
+  L.ID,
+  L.createdAt,
+  L.createdBy,
+  L.modifiedAt,
+  L.modifiedBy,
+  L.email,
+  L.firtsname,
+  L.lastname,
+  L.country,
+  L.createon,
+  L.deliverydate,
+  L.orderstatus,
+  L.imagenurl,
+  L.item_ID
+FROM com_logali_SalesOrder AS L;
+
+CREATE VIEW localized_de_com_logali_SelSalesOrder AS SELECT
+  SalesOrder_0.ID,
+  SalesOrder_0.createdAt,
+  SalesOrder_0.createdBy,
+  SalesOrder_0.modifiedAt,
+  SalesOrder_0.modifiedBy,
+  SalesOrder_0.email,
+  SalesOrder_0.firtsname,
+  SalesOrder_0.lastname,
+  SalesOrder_0.country,
+  SalesOrder_0.createon,
+  SalesOrder_0.deliverydate,
+  SalesOrder_0.orderstatus,
+  SalesOrder_0.imagenurl,
+  SalesOrder_0.item_ID
+FROM localized_de_com_logali_SalesOrder AS SalesOrder_0;
+
+CREATE VIEW localized_fr_com_logali_SelSalesOrder AS SELECT
+  SalesOrder_0.ID,
+  SalesOrder_0.createdAt,
+  SalesOrder_0.createdBy,
+  SalesOrder_0.modifiedAt,
+  SalesOrder_0.modifiedBy,
+  SalesOrder_0.email,
+  SalesOrder_0.firtsname,
+  SalesOrder_0.lastname,
+  SalesOrder_0.country,
+  SalesOrder_0.createon,
+  SalesOrder_0.deliverydate,
+  SalesOrder_0.orderstatus,
+  SalesOrder_0.imagenurl,
+  SalesOrder_0.item_ID
+FROM localized_fr_com_logali_SalesOrder AS SalesOrder_0;
+

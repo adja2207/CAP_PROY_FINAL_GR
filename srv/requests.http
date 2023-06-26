@@ -1,0 +1,32 @@
+###GET SALESORDER
+
+GET https://localhost:4004/manage-order/GetOrders
+
+GET https://localhost:4004/manage-order/GetOrders('gsimison3@123-reg.co.uk')
+### Create Orders
+GET http://localhost:4004/managed_order/CreateSalesOrder HTTP/1.1
+Content-type: application/json
+
+{
+    "email": "hdymocke0@wordpress.com",
+    "firstName": "Lorena",
+    "lastName": "Garcia",
+    "createdon" : "2024-10-10"
+}
+
+### Update Order
+PUT http://localhost:4004/manage-order/SalesOrder('jrushworth1@cam.ac.uk') HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstName": "FirstName Updated",
+    "lastName": "LastName Updated"
+}
+
+###Delete Order
+DELETE http://localhost:4004/manage-order/SalesOrder('thellin2@uol.com.br')
+
+
+### Cancel Order - Action
+POST http://localhost:4004/manage-order/cancelSalesOrder
+Content-Type: application/json

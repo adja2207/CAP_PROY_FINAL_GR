@@ -1,0 +1,44 @@
+{
+  "name": "saler_order_gr",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@cap-js/graphql": "^0.6.0",
+    "@sap-cloud-sdk/http-client": "^3.2.0",
+    "@sap/cds": "^6",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.9.7",
+    "cors": "^2.8.5",
+    "create-react-app": "^5.0.1",
+    "dotenv": "^16.3.1",
+    "express": "^4",
+    "yarn": "^1.22.19"
+  },
+  "devDependencies": {
+    "sqlite3": "^5"
+  },
+  "scripts": {
+    "start": "cds-serve"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "database": "db/SalesOrder.sqlite"
+        }
+      },
+      "sapbackend": {
+        "kind": "odata-v2",
+        "model": "srv/external/sapbackend",
+        "credentials": {
+          "requestTimeout": 3000,
+          "url": "http://erp13.sap4practice.com:9037/sap/opu/odata/sap/YSAPUI5_SRV_01",
+          "authentication": "NoAuthentication"
+        }
+      }
+    }
+  }
+}
